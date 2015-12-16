@@ -1,4 +1,4 @@
-#cython: embedsignature=True, always_allow_keywords=False, optimize.unpack_method_calls=True
+#cython: embedsignature=True
 from logging import getLogger
 
 import sys

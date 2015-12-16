@@ -2140,7 +2140,7 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
   #endif
 
   /* "mongosizeof/_cython_impl.pyx":2
- * #cython: embedsignature=True, always_allow_keywords=False, optimize.unpack_method_calls=True
+ * #cython: embedsignature=True
  * from logging import getLogger             # <<<<<<<<<<<<<<
  * 
  * import sys
@@ -2248,7 +2248,7 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
   __pyx_t_2 = 0;
 
   /* "mongosizeof/_cython_impl.pyx":1
- * #cython: embedsignature=True, always_allow_keywords=False, optimize.unpack_method_calls=True             # <<<<<<<<<<<<<<
+ * #cython: embedsignature=True             # <<<<<<<<<<<<<<
  * from logging import getLogger
  * 
  */
