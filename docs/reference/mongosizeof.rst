@@ -1,0 +1,5 @@
+mongosizeof
+===========
+
+.. automodule:: mongosizeof
+    :members:
