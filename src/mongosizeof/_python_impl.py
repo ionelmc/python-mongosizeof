@@ -5,6 +5,8 @@ import sys
 from datetime import date
 from datetime import datetime
 
+PY3 = sys.version_info[0] == 3
+
 
 def naive_sizeof(obj, sizeof=sys.getsizeof):
     if isinstance(obj, dict):
@@ -33,7 +35,8 @@ def bson_sizeof(obj):
         if isinstance(obj, dict):
             # int32 + list + \00
             #          ^: type(8bit) + keystr + \00 + value
-            return 5 + sum(2 + len(str(key)) + bson_sizeof(value) for key, value in obj.iteritems())
+            return 5 + sum(2 + len(str(key)) + bson_sizeof(value) for key, value in (
+                obj.items() if PY3 else obj.iteritems()))
         elif isinstance(obj, (list, tuple, set, frozenset)):
             return 5 + sum(2 + bson_sizeof(value) for value in obj)
         elif isinstance(obj, int):
