@@ -1,18 +1,19 @@
-#cython: embedsignature=True, always_allow_keywords=False
+#cython: embedsignature=True, always_allow_keywords=False, optimize.unpack_method_calls=True
 from logging import getLogger
-
-logger = getLogger(__name__)
 
 import sys
 from datetime import date
 from datetime import datetime
 
+cdef object _sys_getsizeof = sys.getsizeof
+cdef object logger = getLogger("mongosizeof._cython_impl")
+
 cpdef int naive_sizeof(object obj):
-    cdef int total = sys.getsizeof(obj)
+    cdef int total = _sys_getsizeof(obj)
 
     if isinstance(obj, dict):
         for key, value in obj.iteritems():
-            total += sys.getsizeof(key) + naive_sizeof(value)
+            total += _sys_getsizeof(key) + naive_sizeof(value)
 
     elif isinstance(obj, (list, tuple, set, frozenset)):
         for item in obj:

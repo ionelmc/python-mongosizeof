@@ -529,8 +529,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
-
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
 #else
@@ -581,6 +579,8 @@ static void __Pyx_WriteUnraisable(const char *name, int clineno,
 static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
     const char *name, int exact);
 
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
 static CYTHON_INLINE void __Pyx_ExceptionSave(PyObject **type, PyObject **value, PyObject **tb);
 static void __Pyx_ExceptionReset(PyObject *type, PyObject *value, PyObject *tb);
 
@@ -621,6 +621,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
 /* Module declarations from 'mongosizeof._cython_impl' */
+static PyObject *__pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof = 0;
+static PyObject *__pyx_v_11mongosizeof_12_cython_impl_logger = 0;
 static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof(PyObject *, int __pyx_skip_dispatch); /*proto*/
 static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof_row(PyObject *, int __pyx_skip_dispatch); /*proto*/
@@ -633,10 +635,8 @@ static PyObject *__pyx_builtin_Exception;
 static char __pyx_k_sys[] = "sys";
 static char __pyx_k_date[] = "date";
 static char __pyx_k_main[] = "__main__";
-static char __pyx_k_name[] = "__name__";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_import[] = "__import__";
-static char __pyx_k_logger[] = "logger";
 static char __pyx_k_logging[] = "logging";
 static char __pyx_k_critical[] = "critical";
 static char __pyx_k_datetime[] = "datetime";
@@ -644,6 +644,7 @@ static char __pyx_k_Exception[] = "Exception";
 static char __pyx_k_getLogger[] = "getLogger";
 static char __pyx_k_getsizeof[] = "getsizeof";
 static char __pyx_k_iteritems[] = "iteritems";
+static char __pyx_k_mongosizeof__cython_impl[] = "mongosizeof._cython_impl";
 static char __pyx_k_Failed_to_compute_size_s_for_r[] = "Failed to compute size (%s) for:\n\t%r";
 static char __pyx_k_Failed_to_compute_size_unknown_t[] = "Failed to compute size (unknown type %r) for:\n\t%r";
 static PyObject *__pyx_n_s_Exception;
@@ -656,22 +657,22 @@ static PyObject *__pyx_n_s_getLogger;
 static PyObject *__pyx_n_s_getsizeof;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_iteritems;
-static PyObject *__pyx_n_s_logger;
 static PyObject *__pyx_n_s_logging;
 static PyObject *__pyx_n_s_main;
-static PyObject *__pyx_n_s_name;
+static PyObject *__pyx_kp_s_mongosizeof__cython_impl;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_naive_sizeof(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj); /* proto */
 static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_2col_sizeof(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj_list); /* proto */
 static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_4col_sizeof_row(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_row); /* proto */
 static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_6bson_sizeof(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_obj); /* proto */
+static PyObject *__pyx_tuple_;
 
-/* "mongosizeof/_cython_impl.pyx":10
- * from datetime import datetime
+/* "mongosizeof/_cython_impl.pyx":11
+ * cdef object logger = getLogger("mongosizeof._cython_impl")
  * 
  * cpdef int naive_sizeof(object obj):             # <<<<<<<<<<<<<<
- *     cdef int total = sys.getsizeof(obj)
+ *     cdef int total = _sys_getsizeof(obj)
  * 
  */
 
@@ -702,153 +703,145 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("naive_sizeof", 0);
 
-  /* "mongosizeof/_cython_impl.pyx":11
+  /* "mongosizeof/_cython_impl.pyx":12
  * 
  * cpdef int naive_sizeof(object obj):
- *     cdef int total = sys.getsizeof(obj)             # <<<<<<<<<<<<<<
+ *     cdef int total = _sys_getsizeof(obj)             # <<<<<<<<<<<<<<
  * 
  *     if isinstance(obj, dict):
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_getsizeof); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof);
+  __pyx_t_2 = __pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof; __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_obj); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_obj); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2); __pyx_t_2 = NULL;
+    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_obj);
     __Pyx_GIVEREF(__pyx_v_obj);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_obj);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_total = __pyx_t_5;
 
-  /* "mongosizeof/_cython_impl.pyx":13
- *     cdef int total = sys.getsizeof(obj)
+  /* "mongosizeof/_cython_impl.pyx":14
+ *     cdef int total = _sys_getsizeof(obj)
  * 
  *     if isinstance(obj, dict):             # <<<<<<<<<<<<<<
  *         for key, value in obj.iteritems():
- *             total += sys.getsizeof(key) + naive_sizeof(value)
+ *             total += _sys_getsizeof(key) + naive_sizeof(value)
  */
   __pyx_t_6 = PyDict_Check(__pyx_v_obj); 
   __pyx_t_7 = (__pyx_t_6 != 0);
   if (__pyx_t_7) {
 
-    /* "mongosizeof/_cython_impl.pyx":14
+    /* "mongosizeof/_cython_impl.pyx":15
  * 
  *     if isinstance(obj, dict):
  *         for key, value in obj.iteritems():             # <<<<<<<<<<<<<<
- *             total += sys.getsizeof(key) + naive_sizeof(value)
+ *             total += _sys_getsizeof(key) + naive_sizeof(value)
  * 
  */
     __pyx_t_8 = 0;
     if (unlikely(__pyx_v_obj == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "iteritems");
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
-    __pyx_t_3 = __Pyx_dict_iterator(__pyx_v_obj, 0, __pyx_n_s_iteritems, (&__pyx_t_9), (&__pyx_t_5)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_obj, 0, __pyx_n_s_iteritems, (&__pyx_t_9), (&__pyx_t_5)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_XDECREF(__pyx_t_1);
-    __pyx_t_1 = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __pyx_t_1 = __pyx_t_2;
+    __pyx_t_2 = 0;
     while (1) {
-      __pyx_t_10 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_9, &__pyx_t_8, &__pyx_t_3, &__pyx_t_4, NULL, __pyx_t_5);
+      __pyx_t_10 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_9, &__pyx_t_8, &__pyx_t_2, &__pyx_t_4, NULL, __pyx_t_5);
       if (unlikely(__pyx_t_10 == 0)) break;
-      if (unlikely(__pyx_t_10 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_3);
+      if (unlikely(__pyx_t_10 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_3);
-      __pyx_t_3 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_2);
+      __pyx_t_2 = 0;
       __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "mongosizeof/_cython_impl.pyx":15
+      /* "mongosizeof/_cython_impl.pyx":16
  *     if isinstance(obj, dict):
  *         for key, value in obj.iteritems():
- *             total += sys.getsizeof(key) + naive_sizeof(value)             # <<<<<<<<<<<<<<
+ *             total += _sys_getsizeof(key) + naive_sizeof(value)             # <<<<<<<<<<<<<<
  * 
  *     elif isinstance(obj, (list, tuple, set, frozenset)):
  */
-      __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_total); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_total); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_getsizeof); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_11);
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = NULL;
-      if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
-        __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_11);
-        if (likely(__pyx_t_2)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
-          __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(__pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof);
+      __pyx_t_3 = __pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof; __pyx_t_11 = NULL;
+      if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
+        __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_3);
+        if (likely(__pyx_t_11)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+          __Pyx_INCREF(__pyx_t_11);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_11, function);
+          __Pyx_DECREF_SET(__pyx_t_3, function);
         }
       }
-      if (!__pyx_t_2) {
-        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_v_key); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
+      if (!__pyx_t_11) {
+        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_key); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
       } else {
-        __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_12);
-        __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_2); __pyx_t_2 = NULL;
+        __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_11); __pyx_t_11 = NULL;
         __Pyx_INCREF(__pyx_v_key);
         __Pyx_GIVEREF(__pyx_v_key);
         PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_v_key);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       }
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(__pyx_v_value, 0)); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_12 = PyNumber_Add(__pyx_t_3, __pyx_t_11); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = PyNumber_InPlaceAdd(__pyx_t_4, __pyx_t_12); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(__pyx_v_value, 0)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_12 = PyNumber_Add(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_12);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_t_4, __pyx_t_12); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_11); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 15; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_v_total = __pyx_t_10;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "mongosizeof/_cython_impl.pyx":13
- *     cdef int total = sys.getsizeof(obj)
+    /* "mongosizeof/_cython_impl.pyx":14
+ *     cdef int total = _sys_getsizeof(obj)
  * 
  *     if isinstance(obj, dict):             # <<<<<<<<<<<<<<
  *         for key, value in obj.iteritems():
- *             total += sys.getsizeof(key) + naive_sizeof(value)
+ *             total += _sys_getsizeof(key) + naive_sizeof(value)
  */
     goto __pyx_L3;
   }
 
-  /* "mongosizeof/_cython_impl.pyx":17
- *             total += sys.getsizeof(key) + naive_sizeof(value)
+  /* "mongosizeof/_cython_impl.pyx":18
+ *             total += _sys_getsizeof(key) + naive_sizeof(value)
  * 
  *     elif isinstance(obj, (list, tuple, set, frozenset)):             # <<<<<<<<<<<<<<
  *         for item in obj:
@@ -882,7 +875,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
   __pyx_t_6 = (__pyx_t_7 != 0);
   if (__pyx_t_6) {
 
-    /* "mongosizeof/_cython_impl.pyx":18
+    /* "mongosizeof/_cython_impl.pyx":19
  * 
  *     elif isinstance(obj, (list, tuple, set, frozenset)):
  *         for item in obj:             # <<<<<<<<<<<<<<
@@ -893,45 +886,45 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
       __pyx_t_1 = __pyx_v_obj; __Pyx_INCREF(__pyx_t_1); __pyx_t_9 = 0;
       __pyx_t_14 = NULL;
     } else {
-      __pyx_t_9 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_obj); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_9 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_obj); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_14 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
     for (;;) {
       if (likely(!__pyx_t_14)) {
         if (likely(PyList_CheckExact(__pyx_t_1))) {
           if (__pyx_t_9 >= PyList_GET_SIZE(__pyx_t_1)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_11 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_9); __Pyx_INCREF(__pyx_t_11); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_9); __Pyx_INCREF(__pyx_t_3); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_11 = PySequence_ITEM(__pyx_t_1, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_11);
+          __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
           #endif
         } else {
           if (__pyx_t_9 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
           #if CYTHON_COMPILING_IN_CPYTHON
-          __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_9); __Pyx_INCREF(__pyx_t_11); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_9); __Pyx_INCREF(__pyx_t_3); __pyx_t_9++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           #else
-          __pyx_t_11 = PySequence_ITEM(__pyx_t_1, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_11);
+          __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_9); __pyx_t_9++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
           #endif
         }
       } else {
-        __pyx_t_11 = __pyx_t_14(__pyx_t_1);
-        if (unlikely(!__pyx_t_11)) {
+        __pyx_t_3 = __pyx_t_14(__pyx_t_1);
+        if (unlikely(!__pyx_t_3)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           }
           break;
         }
-        __Pyx_GOTREF(__pyx_t_11);
+        __Pyx_GOTREF(__pyx_t_3);
       }
-      __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_11);
-      __pyx_t_11 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_3);
+      __pyx_t_3 = 0;
 
-      /* "mongosizeof/_cython_impl.pyx":19
+      /* "mongosizeof/_cython_impl.pyx":20
  *     elif isinstance(obj, (list, tuple, set, frozenset)):
  *         for item in obj:
  *             total += naive_sizeof(item)             # <<<<<<<<<<<<<<
@@ -940,7 +933,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
  */
       __pyx_v_total = (__pyx_v_total + __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(__pyx_v_item, 0));
 
-      /* "mongosizeof/_cython_impl.pyx":18
+      /* "mongosizeof/_cython_impl.pyx":19
  * 
  *     elif isinstance(obj, (list, tuple, set, frozenset)):
  *         for item in obj:             # <<<<<<<<<<<<<<
@@ -950,8 +943,8 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "mongosizeof/_cython_impl.pyx":17
- *             total += sys.getsizeof(key) + naive_sizeof(value)
+    /* "mongosizeof/_cython_impl.pyx":18
+ *             total += _sys_getsizeof(key) + naive_sizeof(value)
  * 
  *     elif isinstance(obj, (list, tuple, set, frozenset)):             # <<<<<<<<<<<<<<
  *         for item in obj:
@@ -960,7 +953,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
   }
   __pyx_L3:;
 
-  /* "mongosizeof/_cython_impl.pyx":21
+  /* "mongosizeof/_cython_impl.pyx":22
  *             total += naive_sizeof(item)
  * 
  *     return total             # <<<<<<<<<<<<<<
@@ -970,11 +963,11 @@ static int __pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(PyObject *__pyx_v_o
   __pyx_r = __pyx_v_total;
   goto __pyx_L0;
 
-  /* "mongosizeof/_cython_impl.pyx":10
- * from datetime import datetime
+  /* "mongosizeof/_cython_impl.pyx":11
+ * cdef object logger = getLogger("mongosizeof._cython_impl")
  * 
  * cpdef int naive_sizeof(object obj):             # <<<<<<<<<<<<<<
- *     cdef int total = sys.getsizeof(obj)
+ *     cdef int total = _sys_getsizeof(obj)
  * 
  */
 
@@ -1019,7 +1012,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_naive_sizeof(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("naive_sizeof", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(__pyx_v_obj, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_naive_sizeof(__pyx_v_obj, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1036,7 +1029,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_naive_sizeof(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "mongosizeof/_cython_impl.pyx":23
+/* "mongosizeof/_cython_impl.pyx":24
  *     return total
  * 
  * cpdef int col_sizeof(list obj_list):             # <<<<<<<<<<<<<<
@@ -1058,7 +1051,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof(PyObject *__pyx_v_obj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("col_sizeof", 0);
 
-  /* "mongosizeof/_cython_impl.pyx":25
+  /* "mongosizeof/_cython_impl.pyx":26
  * cpdef int col_sizeof(list obj_list):
  *     # item + type(8byte) + "_id" + \00 + ObjectID(12byte)
  *     cdef int total = 0             # <<<<<<<<<<<<<<
@@ -1067,7 +1060,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof(PyObject *__pyx_v_obj
  */
   __pyx_v_total = 0;
 
-  /* "mongosizeof/_cython_impl.pyx":26
+  /* "mongosizeof/_cython_impl.pyx":27
  *     # item + type(8byte) + "_id" + \00 + ObjectID(12byte)
  *     cdef int total = 0
  *     for item in obj_list:             # <<<<<<<<<<<<<<
@@ -1076,31 +1069,31 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof(PyObject *__pyx_v_obj
  */
   if (unlikely(__pyx_v_obj_list == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __pyx_t_1 = __pyx_v_obj_list; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
   for (;;) {
     if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
     #if CYTHON_COMPILING_IN_CPYTHON
-    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     #else
-    __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_item, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "mongosizeof/_cython_impl.pyx":27
+    /* "mongosizeof/_cython_impl.pyx":28
  *     cdef int total = 0
  *     for item in obj_list:
  *         total += col_sizeof_row(item)             # <<<<<<<<<<<<<<
  *     return total
  * 
  */
-    if (!(likely(PyDict_CheckExact(__pyx_v_item))||((__pyx_v_item) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_item)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!(likely(PyDict_CheckExact(__pyx_v_item))||((__pyx_v_item) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_v_item)->tp_name), 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_v_total = (__pyx_v_total + __pyx_f_11mongosizeof_12_cython_impl_col_sizeof_row(((PyObject*)__pyx_v_item), 0));
 
-    /* "mongosizeof/_cython_impl.pyx":26
+    /* "mongosizeof/_cython_impl.pyx":27
  *     # item + type(8byte) + "_id" + \00 + ObjectID(12byte)
  *     cdef int total = 0
  *     for item in obj_list:             # <<<<<<<<<<<<<<
@@ -1110,7 +1103,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof(PyObject *__pyx_v_obj
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mongosizeof/_cython_impl.pyx":28
+  /* "mongosizeof/_cython_impl.pyx":29
  *     for item in obj_list:
  *         total += col_sizeof_row(item)
  *     return total             # <<<<<<<<<<<<<<
@@ -1120,7 +1113,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof(PyObject *__pyx_v_obj
   __pyx_r = __pyx_v_total;
   goto __pyx_L0;
 
-  /* "mongosizeof/_cython_impl.pyx":23
+  /* "mongosizeof/_cython_impl.pyx":24
  *     return total
  * 
  * cpdef int col_sizeof(list obj_list):             # <<<<<<<<<<<<<<
@@ -1150,7 +1143,7 @@ static PyObject *__pyx_pw_11mongosizeof_12_cython_impl_3col_sizeof(PyObject *__p
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("col_sizeof (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_obj_list), (&PyList_Type), 1, "obj_list", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_obj_list), (&PyList_Type), 1, "obj_list", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_11mongosizeof_12_cython_impl_2col_sizeof(__pyx_self, ((PyObject*)__pyx_v_obj_list));
 
   /* function exit code */
@@ -1171,7 +1164,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_2col_sizeof(CYTHON_UNUSED
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("col_sizeof", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_col_sizeof(__pyx_v_obj_list, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 23; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_col_sizeof(__pyx_v_obj_list, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1188,7 +1181,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_2col_sizeof(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "mongosizeof/_cython_impl.pyx":30
+/* "mongosizeof/_cython_impl.pyx":31
  *     return total
  * 
  * cpdef int col_sizeof_row(dict row):             # <<<<<<<<<<<<<<
@@ -1202,7 +1195,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof_row(PyObject *__pyx_v
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("col_sizeof_row", 0);
 
-  /* "mongosizeof/_cython_impl.pyx":31
+  /* "mongosizeof/_cython_impl.pyx":32
  * 
  * cpdef int col_sizeof_row(dict row):
  *     return 17 + bson_sizeof(row)             # <<<<<<<<<<<<<<
@@ -1212,7 +1205,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_col_sizeof_row(PyObject *__pyx_v
   __pyx_r = (17 + __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(__pyx_v_row, 0));
   goto __pyx_L0;
 
-  /* "mongosizeof/_cython_impl.pyx":30
+  /* "mongosizeof/_cython_impl.pyx":31
  *     return total
  * 
  * cpdef int col_sizeof_row(dict row):             # <<<<<<<<<<<<<<
@@ -1236,7 +1229,7 @@ static PyObject *__pyx_pw_11mongosizeof_12_cython_impl_5col_sizeof_row(PyObject 
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("col_sizeof_row (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_row), (&PyDict_Type), 1, "row", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_row), (&PyDict_Type), 1, "row", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_11mongosizeof_12_cython_impl_4col_sizeof_row(__pyx_self, ((PyObject*)__pyx_v_row));
 
   /* function exit code */
@@ -1257,7 +1250,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_4col_sizeof_row(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("col_sizeof_row", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_col_sizeof_row(__pyx_v_row, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_col_sizeof_row(__pyx_v_row, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1274,7 +1267,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_4col_sizeof_row(CYTHON_UN
   return __pyx_r;
 }
 
-/* "mongosizeof/_cython_impl.pyx":33
+/* "mongosizeof/_cython_impl.pyx":34
  *     return 17 + bson_sizeof(row)
  * 
  * cpdef int bson_sizeof(object obj):             # <<<<<<<<<<<<<<
@@ -1314,7 +1307,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bson_sizeof", 0);
 
-  /* "mongosizeof/_cython_impl.pyx":36
+  /* "mongosizeof/_cython_impl.pyx":37
  *     # Note: this is a very rough estimate
  *     # see: http://bsonspec.org/#/specification
  *     cdef int total = 0             # <<<<<<<<<<<<<<
@@ -1323,7 +1316,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
   __pyx_v_total = 0;
 
-  /* "mongosizeof/_cython_impl.pyx":38
+  /* "mongosizeof/_cython_impl.pyx":39
  *     cdef int total = 0
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -1337,7 +1330,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "mongosizeof/_cython_impl.pyx":39
+      /* "mongosizeof/_cython_impl.pyx":40
  * 
  *     try:
  *         if isinstance(obj, dict):             # <<<<<<<<<<<<<<
@@ -1348,7 +1341,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_5 = (__pyx_t_4 != 0);
       if (__pyx_t_5) {
 
-        /* "mongosizeof/_cython_impl.pyx":42
+        /* "mongosizeof/_cython_impl.pyx":43
  *             # int32 + list + \00
  *             #          ^: type(8bit) + keystr + \00 + value
  *             total = 5             # <<<<<<<<<<<<<<
@@ -1357,7 +1350,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 5;
 
-        /* "mongosizeof/_cython_impl.pyx":43
+        /* "mongosizeof/_cython_impl.pyx":44
  *             #          ^: type(8bit) + keystr + \00 + value
  *             total = 5
  *             for key, value in obj.iteritems():             # <<<<<<<<<<<<<<
@@ -1367,9 +1360,9 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         __pyx_t_7 = 0;
         if (unlikely(__pyx_v_obj == Py_None)) {
           PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%s'", "iteritems");
-          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
-        __pyx_t_10 = __Pyx_dict_iterator(__pyx_v_obj, 0, __pyx_n_s_iteritems, (&__pyx_t_8), (&__pyx_t_9)); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_10 = __Pyx_dict_iterator(__pyx_v_obj, 0, __pyx_n_s_iteritems, (&__pyx_t_8), (&__pyx_t_9)); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_XDECREF(__pyx_t_6);
         __pyx_t_6 = __pyx_t_10;
@@ -1377,7 +1370,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         while (1) {
           __pyx_t_12 = __Pyx_dict_iter_next(__pyx_t_6, __pyx_t_8, &__pyx_t_7, &__pyx_t_10, &__pyx_t_11, NULL, __pyx_t_9);
           if (unlikely(__pyx_t_12 == 0)) break;
-          if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_XDECREF_SET(__pyx_v_key, __pyx_t_10);
@@ -1385,28 +1378,28 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
           __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_11);
           __pyx_t_11 = 0;
 
-          /* "mongosizeof/_cython_impl.pyx":44
+          /* "mongosizeof/_cython_impl.pyx":45
  *             total = 5
  *             for key, value in obj.iteritems():
  *                 total += 2 + len(str(key)) + bson_sizeof(value)             # <<<<<<<<<<<<<<
  *         elif isinstance(obj, (list, tuple, set, frozenset)):
  *             total = 5
  */
-          __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_INCREF(__pyx_v_key);
           __Pyx_GIVEREF(__pyx_v_key);
           PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_key);
-          __pyx_t_10 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __pyx_t_10 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_t_13 = PyObject_Length(__pyx_t_10); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __pyx_t_13 = PyObject_Length(__pyx_t_10); if (unlikely(__pyx_t_13 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 45; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_v_total = (__pyx_v_total + ((2 + __pyx_t_13) + __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(__pyx_v_value, 0)));
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "mongosizeof/_cython_impl.pyx":39
+        /* "mongosizeof/_cython_impl.pyx":40
  * 
  *     try:
  *         if isinstance(obj, dict):             # <<<<<<<<<<<<<<
@@ -1416,7 +1409,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":45
+      /* "mongosizeof/_cython_impl.pyx":46
  *             for key, value in obj.iteritems():
  *                 total += 2 + len(str(key)) + bson_sizeof(value)
  *         elif isinstance(obj, (list, tuple, set, frozenset)):             # <<<<<<<<<<<<<<
@@ -1451,7 +1444,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_4 = (__pyx_t_5 != 0);
       if (__pyx_t_4) {
 
-        /* "mongosizeof/_cython_impl.pyx":46
+        /* "mongosizeof/_cython_impl.pyx":47
  *                 total += 2 + len(str(key)) + bson_sizeof(value)
  *         elif isinstance(obj, (list, tuple, set, frozenset)):
  *             total = 5             # <<<<<<<<<<<<<<
@@ -1460,7 +1453,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 5;
 
-        /* "mongosizeof/_cython_impl.pyx":47
+        /* "mongosizeof/_cython_impl.pyx":48
  *         elif isinstance(obj, (list, tuple, set, frozenset)):
  *             total = 5
  *             for value in obj:             # <<<<<<<<<<<<<<
@@ -1471,26 +1464,26 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
           __pyx_t_6 = __pyx_v_obj; __Pyx_INCREF(__pyx_t_6); __pyx_t_8 = 0;
           __pyx_t_15 = NULL;
         } else {
-          __pyx_t_8 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_obj); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __pyx_t_8 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_v_obj); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_15 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __pyx_t_15 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         for (;;) {
           if (likely(!__pyx_t_15)) {
             if (likely(PyList_CheckExact(__pyx_t_6))) {
               if (__pyx_t_8 >= PyList_GET_SIZE(__pyx_t_6)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_10 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+              __pyx_t_10 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
               #else
-              __pyx_t_10 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+              __pyx_t_10 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
               __Pyx_GOTREF(__pyx_t_10);
               #endif
             } else {
               if (__pyx_t_8 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_10 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+              __pyx_t_10 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_8); __Pyx_INCREF(__pyx_t_10); __pyx_t_8++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
               #else
-              __pyx_t_10 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+              __pyx_t_10 = PySequence_ITEM(__pyx_t_6, __pyx_t_8); __pyx_t_8++; if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
               __Pyx_GOTREF(__pyx_t_10);
               #endif
             }
@@ -1500,7 +1493,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+                else {__pyx_filename = __pyx_f[0]; __pyx_lineno = 48; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
               }
               break;
             }
@@ -1509,7 +1502,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
           __Pyx_XDECREF_SET(__pyx_v_value, __pyx_t_10);
           __pyx_t_10 = 0;
 
-          /* "mongosizeof/_cython_impl.pyx":48
+          /* "mongosizeof/_cython_impl.pyx":49
  *             total = 5
  *             for value in obj:
  *                 total += 2 + bson_sizeof(value)             # <<<<<<<<<<<<<<
@@ -1518,7 +1511,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
           __pyx_v_total = (__pyx_v_total + (2 + __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(__pyx_v_value, 0)));
 
-          /* "mongosizeof/_cython_impl.pyx":47
+          /* "mongosizeof/_cython_impl.pyx":48
  *         elif isinstance(obj, (list, tuple, set, frozenset)):
  *             total = 5
  *             for value in obj:             # <<<<<<<<<<<<<<
@@ -1528,7 +1521,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "mongosizeof/_cython_impl.pyx":45
+        /* "mongosizeof/_cython_impl.pyx":46
  *             for key, value in obj.iteritems():
  *                 total += 2 + len(str(key)) + bson_sizeof(value)
  *         elif isinstance(obj, (list, tuple, set, frozenset)):             # <<<<<<<<<<<<<<
@@ -1538,7 +1531,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":49
+      /* "mongosizeof/_cython_impl.pyx":50
  *             for value in obj:
  *                 total += 2 + bson_sizeof(value)
  *         elif isinstance(obj, int):             # <<<<<<<<<<<<<<
@@ -1549,7 +1542,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_5 = (__pyx_t_4 != 0);
       if (__pyx_t_5) {
 
-        /* "mongosizeof/_cython_impl.pyx":50
+        /* "mongosizeof/_cython_impl.pyx":51
  *                 total += 2 + bson_sizeof(value)
  *         elif isinstance(obj, int):
  *             total = 4             # <<<<<<<<<<<<<<
@@ -1558,7 +1551,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 4;
 
-        /* "mongosizeof/_cython_impl.pyx":49
+        /* "mongosizeof/_cython_impl.pyx":50
  *             for value in obj:
  *                 total += 2 + bson_sizeof(value)
  *         elif isinstance(obj, int):             # <<<<<<<<<<<<<<
@@ -1568,7 +1561,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":51
+      /* "mongosizeof/_cython_impl.pyx":52
  *         elif isinstance(obj, int):
  *             total = 4
  *         elif isinstance(obj, (float, long)):             # <<<<<<<<<<<<<<
@@ -1589,7 +1582,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_4 = (__pyx_t_5 != 0);
       if (__pyx_t_4) {
 
-        /* "mongosizeof/_cython_impl.pyx":52
+        /* "mongosizeof/_cython_impl.pyx":53
  *             total = 4
  *         elif isinstance(obj, (float, long)):
  *             total = 8             # <<<<<<<<<<<<<<
@@ -1598,7 +1591,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 8;
 
-        /* "mongosizeof/_cython_impl.pyx":51
+        /* "mongosizeof/_cython_impl.pyx":52
  *         elif isinstance(obj, int):
  *             total = 4
  *         elif isinstance(obj, (float, long)):             # <<<<<<<<<<<<<<
@@ -1608,7 +1601,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":53
+      /* "mongosizeof/_cython_impl.pyx":54
  *         elif isinstance(obj, (float, long)):
  *             total = 8
  *         elif isinstance(obj, basestring):             # <<<<<<<<<<<<<<
@@ -1619,17 +1612,17 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_5 = (__pyx_t_4 != 0);
       if (__pyx_t_5) {
 
-        /* "mongosizeof/_cython_impl.pyx":54
+        /* "mongosizeof/_cython_impl.pyx":55
  *             total = 8
  *         elif isinstance(obj, basestring):
  *             total = 4 + len(obj) + 1             # <<<<<<<<<<<<<<
  *         elif obj is None:
  *             total = 0
  */
-        __pyx_t_8 = PyObject_Length(__pyx_v_obj); if (unlikely(__pyx_t_8 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_8 = PyObject_Length(__pyx_v_obj); if (unlikely(__pyx_t_8 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __pyx_v_total = ((4 + __pyx_t_8) + 1);
 
-        /* "mongosizeof/_cython_impl.pyx":53
+        /* "mongosizeof/_cython_impl.pyx":54
  *         elif isinstance(obj, (float, long)):
  *             total = 8
  *         elif isinstance(obj, basestring):             # <<<<<<<<<<<<<<
@@ -1639,7 +1632,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":55
+      /* "mongosizeof/_cython_impl.pyx":56
  *         elif isinstance(obj, basestring):
  *             total = 4 + len(obj) + 1
  *         elif obj is None:             # <<<<<<<<<<<<<<
@@ -1650,7 +1643,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_4 = (__pyx_t_5 != 0);
       if (__pyx_t_4) {
 
-        /* "mongosizeof/_cython_impl.pyx":56
+        /* "mongosizeof/_cython_impl.pyx":57
  *             total = 4 + len(obj) + 1
  *         elif obj is None:
  *             total = 0             # <<<<<<<<<<<<<<
@@ -1659,7 +1652,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 0;
 
-        /* "mongosizeof/_cython_impl.pyx":55
+        /* "mongosizeof/_cython_impl.pyx":56
  *         elif isinstance(obj, basestring):
  *             total = 4 + len(obj) + 1
  *         elif obj is None:             # <<<<<<<<<<<<<<
@@ -1669,7 +1662,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":57
+      /* "mongosizeof/_cython_impl.pyx":58
  *         elif obj is None:
  *             total = 0
  *         elif isinstance(obj, bool):             # <<<<<<<<<<<<<<
@@ -1678,12 +1671,12 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
       __pyx_t_6 = ((PyObject*)&PyBool_Type);
       __Pyx_INCREF(__pyx_t_6);
-      __pyx_t_4 = PyObject_IsInstance(__pyx_v_obj, __pyx_t_6); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_4 = PyObject_IsInstance(__pyx_v_obj, __pyx_t_6); if (unlikely(__pyx_t_4 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_5 = (__pyx_t_4 != 0);
       if (__pyx_t_5) {
 
-        /* "mongosizeof/_cython_impl.pyx":58
+        /* "mongosizeof/_cython_impl.pyx":59
  *             total = 0
  *         elif isinstance(obj, bool):
  *             total = 1             # <<<<<<<<<<<<<<
@@ -1692,7 +1685,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 1;
 
-        /* "mongosizeof/_cython_impl.pyx":57
+        /* "mongosizeof/_cython_impl.pyx":58
  *         elif obj is None:
  *             total = 0
  *         elif isinstance(obj, bool):             # <<<<<<<<<<<<<<
@@ -1702,16 +1695,16 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":59
+      /* "mongosizeof/_cython_impl.pyx":60
  *         elif isinstance(obj, bool):
  *             total = 1
  *         elif isinstance(obj, (datetime, date)):             # <<<<<<<<<<<<<<
  *             total = 8
  *         else:
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_datetime); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_datetime); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_date); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_date); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 60; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       __Pyx_GOTREF(__pyx_t_10);
       __pyx_t_4 = PyObject_IsInstance(__pyx_v_obj, __pyx_t_6); 
       __pyx_t_14 = (__pyx_t_4 != 0);
@@ -1729,7 +1722,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __pyx_t_4 = (__pyx_t_5 != 0);
       if (__pyx_t_4) {
 
-        /* "mongosizeof/_cython_impl.pyx":60
+        /* "mongosizeof/_cython_impl.pyx":61
  *             total = 1
  *         elif isinstance(obj, (datetime, date)):
  *             total = 8             # <<<<<<<<<<<<<<
@@ -1738,7 +1731,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  */
         __pyx_v_total = 8;
 
-        /* "mongosizeof/_cython_impl.pyx":59
+        /* "mongosizeof/_cython_impl.pyx":60
  *         elif isinstance(obj, bool):
  *             total = 1
  *         elif isinstance(obj, (datetime, date)):             # <<<<<<<<<<<<<<
@@ -1748,7 +1741,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         goto __pyx_L11;
       }
 
-      /* "mongosizeof/_cython_impl.pyx":62
+      /* "mongosizeof/_cython_impl.pyx":63
  *             total = 8
  *         else:
  *             logger.critical("Failed to compute size (unknown type %r) for:\n\t%r", type(obj), obj)             # <<<<<<<<<<<<<<
@@ -1756,27 +1749,24 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
  *         logger.critical("Failed to compute size (%s) for:\n\t%r", exc, obj)
  */
       /*else*/ {
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_logger); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_11mongosizeof_12_cython_impl_logger, __pyx_n_s_critical); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_critical); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-        __Pyx_GOTREF(__pyx_t_11);
-        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = NULL;
+        __pyx_t_11 = NULL;
         __pyx_t_8 = 0;
-        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
-          __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_11);
-          if (likely(__pyx_t_10)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
-            __Pyx_INCREF(__pyx_t_10);
+        if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_10))) {
+          __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_10);
+          if (likely(__pyx_t_11)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
+            __Pyx_INCREF(__pyx_t_11);
             __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_11, function);
+            __Pyx_DECREF_SET(__pyx_t_10, function);
             __pyx_t_8 = 1;
           }
         }
-        __pyx_t_16 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_16 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_16)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_16);
-        if (__pyx_t_10) {
-          __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_10); __pyx_t_10 = NULL;
+        if (__pyx_t_11) {
+          __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_16, 0, __pyx_t_11); __pyx_t_11 = NULL;
         }
         __Pyx_INCREF(__pyx_kp_s_Failed_to_compute_size_unknown_t);
         __Pyx_GIVEREF(__pyx_kp_s_Failed_to_compute_size_unknown_t);
@@ -1787,15 +1777,15 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
         __Pyx_INCREF(__pyx_v_obj);
         __Pyx_GIVEREF(__pyx_v_obj);
         PyTuple_SET_ITEM(__pyx_t_16, 2+__pyx_t_8, __pyx_v_obj);
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_16, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_16, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
       __pyx_L11:;
 
-      /* "mongosizeof/_cython_impl.pyx":38
+      /* "mongosizeof/_cython_impl.pyx":39
  *     cdef int total = 0
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -1808,12 +1798,12 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     goto __pyx_L10_try_end;
     __pyx_L3_error:;
-    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
     __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_XDECREF(__pyx_t_16); __pyx_t_16 = 0;
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "mongosizeof/_cython_impl.pyx":63
+    /* "mongosizeof/_cython_impl.pyx":64
  *         else:
  *             logger.critical("Failed to compute size (unknown type %r) for:\n\t%r", type(obj), obj)
  *     except Exception as exc:             # <<<<<<<<<<<<<<
@@ -1823,41 +1813,38 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
     __pyx_t_9 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
     if (__pyx_t_9) {
       __Pyx_AddTraceback("mongosizeof._cython_impl.bson_sizeof", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_11, &__pyx_t_16) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_10, &__pyx_t_16) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_GOTREF(__pyx_t_10);
       __Pyx_GOTREF(__pyx_t_16);
-      __Pyx_INCREF(__pyx_t_11);
-      __pyx_v_exc = __pyx_t_11;
+      __Pyx_INCREF(__pyx_t_10);
+      __pyx_v_exc = __pyx_t_10;
 
-      /* "mongosizeof/_cython_impl.pyx":64
+      /* "mongosizeof/_cython_impl.pyx":65
  *             logger.critical("Failed to compute size (unknown type %r) for:\n\t%r", type(obj), obj)
  *     except Exception as exc:
  *         logger.critical("Failed to compute size (%s) for:\n\t%r", exc, obj)             # <<<<<<<<<<<<<<
  * 
  *     return total
  */
-      __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_logger); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_v_11mongosizeof_12_cython_impl_logger, __pyx_n_s_critical); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_17);
-      __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_critical); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
-      __Pyx_GOTREF(__pyx_t_18);
-      __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-      __pyx_t_17 = NULL;
+      __pyx_t_18 = NULL;
       __pyx_t_8 = 0;
-      if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_18))) {
-        __pyx_t_17 = PyMethod_GET_SELF(__pyx_t_18);
-        if (likely(__pyx_t_17)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_18);
-          __Pyx_INCREF(__pyx_t_17);
+      if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_17))) {
+        __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_17);
+        if (likely(__pyx_t_18)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_17);
+          __Pyx_INCREF(__pyx_t_18);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_18, function);
+          __Pyx_DECREF_SET(__pyx_t_17, function);
           __pyx_t_8 = 1;
         }
       }
-      __pyx_t_19 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      __pyx_t_19 = PyTuple_New(3+__pyx_t_8); if (unlikely(!__pyx_t_19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
       __Pyx_GOTREF(__pyx_t_19);
-      if (__pyx_t_17) {
-        __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_17); __pyx_t_17 = NULL;
+      if (__pyx_t_18) {
+        __Pyx_GIVEREF(__pyx_t_18); PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_18); __pyx_t_18 = NULL;
       }
       __Pyx_INCREF(__pyx_kp_s_Failed_to_compute_size_s_for_r);
       __Pyx_GIVEREF(__pyx_kp_s_Failed_to_compute_size_s_for_r);
@@ -1868,20 +1855,20 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
       __Pyx_INCREF(__pyx_v_obj);
       __Pyx_GIVEREF(__pyx_v_obj);
       PyTuple_SET_ITEM(__pyx_t_19, 2+__pyx_t_8, __pyx_v_obj);
-      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_t_19, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
-      __Pyx_GOTREF(__pyx_t_10);
+      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_19, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L5_except_error;}
+      __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
-      __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       goto __pyx_L4_exception_handled;
     }
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "mongosizeof/_cython_impl.pyx":38
+    /* "mongosizeof/_cython_impl.pyx":39
  *     cdef int total = 0
  * 
  *     try:             # <<<<<<<<<<<<<<
@@ -1901,7 +1888,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
     __pyx_L10_try_end:;
   }
 
-  /* "mongosizeof/_cython_impl.pyx":66
+  /* "mongosizeof/_cython_impl.pyx":67
  *         logger.critical("Failed to compute size (%s) for:\n\t%r", exc, obj)
  * 
  *     return total             # <<<<<<<<<<<<<<
@@ -1909,7 +1896,7 @@ static int __pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(PyObject *__pyx_v_ob
   __pyx_r = __pyx_v_total;
   goto __pyx_L0;
 
-  /* "mongosizeof/_cython_impl.pyx":33
+  /* "mongosizeof/_cython_impl.pyx":34
  *     return 17 + bson_sizeof(row)
  * 
  * cpdef int bson_sizeof(object obj):             # <<<<<<<<<<<<<<
@@ -1959,7 +1946,7 @@ static PyObject *__pyx_pf_11mongosizeof_12_cython_impl_6bson_sizeof(CYTHON_UNUSE
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("bson_sizeof", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(__pyx_v_obj, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_f_11mongosizeof_12_cython_impl_bson_sizeof(__pyx_v_obj, 0)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2013,16 +2000,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_getsizeof, __pyx_k_getsizeof, sizeof(__pyx_k_getsizeof), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_iteritems, __pyx_k_iteritems, sizeof(__pyx_k_iteritems), 0, 0, 1, 1},
-  {&__pyx_n_s_logger, __pyx_k_logger, sizeof(__pyx_k_logger), 0, 0, 1, 1},
   {&__pyx_n_s_logging, __pyx_k_logging, sizeof(__pyx_k_logging), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
+  {&__pyx_kp_s_mongosizeof__cython_impl, __pyx_k_mongosizeof__cython_impl, sizeof(__pyx_k_mongosizeof__cython_impl), 0, 0, 1, 0},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_Exception = __Pyx_GetBuiltinName(__pyx_n_s_Exception); if (!__pyx_builtin_Exception) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 63; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_Exception = __Pyx_GetBuiltinName(__pyx_n_s_Exception); if (!__pyx_builtin_Exception) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2031,8 +2017,22 @@ static int __Pyx_InitCachedBuiltins(void) {
 static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
+
+  /* "mongosizeof/_cython_impl.pyx":9
+ * 
+ * cdef object _sys_getsizeof = sys.getsizeof
+ * cdef object logger = getLogger("mongosizeof._cython_impl")             # <<<<<<<<<<<<<<
+ * 
+ * cpdef int naive_sizeof(object obj):
+ */
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_mongosizeof__cython_impl); if (unlikely(!__pyx_tuple_)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple_);
+  __Pyx_GIVEREF(__pyx_tuple_);
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_InitGlobals(void) {
@@ -2052,9 +2052,6 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
 {
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2129,6 +2126,8 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
   /*--- Constants init code ---*/
   if (__Pyx_InitCachedConstants() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   /*--- Global init code ---*/
+  __pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof = Py_None; Py_INCREF(Py_None);
+  __pyx_v_11mongosizeof_12_cython_impl_logger = Py_None; Py_INCREF(Py_None);
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
@@ -2141,10 +2140,10 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
   #endif
 
   /* "mongosizeof/_cython_impl.pyx":2
- * #cython: embedsignature=True, always_allow_keywords=False
+ * #cython: embedsignature=True, always_allow_keywords=False, optimize.unpack_method_calls=True
  * from logging import getLogger             # <<<<<<<<<<<<<<
  * 
- * logger = getLogger(__name__)
+ * import sys
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -2163,99 +2162,93 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
   /* "mongosizeof/_cython_impl.pyx":4
  * from logging import getLogger
  * 
- * logger = getLogger(__name__)             # <<<<<<<<<<<<<<
- * 
- * import sys
- */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_getLogger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_name); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_1, function);
-    }
-  }
-  if (!__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GOTREF(__pyx_t_2);
-  } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4); __pyx_t_4 = NULL;
-    __Pyx_GIVEREF(__pyx_t_3);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_3);
-    __pyx_t_3 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_logger, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "mongosizeof/_cython_impl.pyx":6
- * logger = getLogger(__name__)
- * 
  * import sys             # <<<<<<<<<<<<<<
  * from datetime import date
  * from datetime import datetime
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mongosizeof/_cython_impl.pyx":7
+  /* "mongosizeof/_cython_impl.pyx":5
  * 
  * import sys
  * from datetime import date             # <<<<<<<<<<<<<<
  * from datetime import datetime
  * 
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_n_s_date);
   __Pyx_GIVEREF(__pyx_n_s_date);
   PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_date);
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_datetime, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_datetime, __pyx_t_2, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_date); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_1, __pyx_n_s_date); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_date, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_date, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mongosizeof/_cython_impl.pyx":8
+  /* "mongosizeof/_cython_impl.pyx":6
  * import sys
  * from datetime import date
  * from datetime import datetime             # <<<<<<<<<<<<<<
  * 
- * cpdef int naive_sizeof(object obj):
+ * cdef object _sys_getsizeof = sys.getsizeof
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_datetime);
   __Pyx_GIVEREF(__pyx_n_s_datetime);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_datetime);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_datetime, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_datetime, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_datetime); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_datetime); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_datetime, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_datetime, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
+  /* "mongosizeof/_cython_impl.pyx":8
+ * from datetime import datetime
+ * 
+ * cdef object _sys_getsizeof = sys.getsizeof             # <<<<<<<<<<<<<<
+ * cdef object logger = getLogger("mongosizeof._cython_impl")
+ * 
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_getsizeof); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_XGOTREF(__pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof);
+  __Pyx_DECREF_SET(__pyx_v_11mongosizeof_12_cython_impl__sys_getsizeof, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "mongosizeof/_cython_impl.pyx":9
+ * 
+ * cdef object _sys_getsizeof = sys.getsizeof
+ * cdef object logger = getLogger("mongosizeof._cython_impl")             # <<<<<<<<<<<<<<
+ * 
+ * cpdef int naive_sizeof(object obj):
+ */
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_getLogger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_XGOTREF(__pyx_v_11mongosizeof_12_cython_impl_logger);
+  __Pyx_DECREF_SET(__pyx_v_11mongosizeof_12_cython_impl_logger, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
+
   /* "mongosizeof/_cython_impl.pyx":1
- * #cython: embedsignature=True, always_allow_keywords=False             # <<<<<<<<<<<<<<
+ * #cython: embedsignature=True, always_allow_keywords=False, optimize.unpack_method_calls=True             # <<<<<<<<<<<<<<
  * from logging import getLogger
  * 
  */
@@ -2270,9 +2263,6 @@ PyMODINIT_FUNC PyInit__cython_impl(void)
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init mongosizeof._cython_impl", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -2316,23 +2306,6 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
 #else
             "name '%.200s' is not defined", PyString_AS_STRING(name));
 #endif
-    }
-    return result;
-}
-
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
-    PyObject *result;
-#if CYTHON_COMPILING_IN_CPYTHON
-    result = PyDict_GetItem(__pyx_d, name);
-    if (likely(result)) {
-        Py_INCREF(result);
-    } else {
-#else
-    result = PyObject_GetItem(__pyx_d, name);
-    if (!result) {
-        PyErr_Clear();
-#endif
-        result = __Pyx_GetBuiltinName(name);
     }
     return result;
 }
@@ -2747,6 +2720,23 @@ static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, in
     }
     __Pyx_RaiseArgumentTypeInvalid(name, obj, type);
     return 0;
+}
+
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
+    PyObject *result;
+#if CYTHON_COMPILING_IN_CPYTHON
+    result = PyDict_GetItem(__pyx_d, name);
+    if (likely(result)) {
+        Py_INCREF(result);
+    } else {
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    if (!result) {
+        PyErr_Clear();
+#endif
+        result = __Pyx_GetBuiltinName(name);
+    }
+    return result;
 }
 
 static CYTHON_INLINE void __Pyx_ExceptionSave(PyObject **type, PyObject **value, PyObject **tb) {
