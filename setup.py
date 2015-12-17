@@ -6,7 +6,6 @@ import io
 import os
 import re
 from glob import glob
-from itertools import chain
 from os.path import basename
 from os.path import dirname
 from os.path import join
@@ -87,6 +86,6 @@ setup(
             include_dirs=[dirname(path)]
         )
         for root, _, _ in os.walk('src')
-        for path in chain(glob(join(root, '*.c')), glob(join(root, '*.pyx')))
+        for path in glob(join(root, '*.pyx'))
     ]
 )
