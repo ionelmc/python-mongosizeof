@@ -1,20 +1,13 @@
 from logging import getLogger
-logger = getLogger(__name__)
 
-import sys
 from datetime import date
 from datetime import datetime
 
-PY3 = sys.version_info[0] == 3
+from six import PY3
+from six import iteritems
+from six import string_types
 
-
-def naive_sizeof(obj, sizeof=sys.getsizeof):
-    if isinstance(obj, dict):
-        return sizeof(obj) + sum(sizeof(key) + naive_sizeof(value) for key, value in obj.iteritems())
-    elif isinstance(obj, (list, tuple, set, frozenset)):
-        return sizeof(obj) + sum(naive_sizeof(item) for item in obj)
-    else:
-        return sizeof(obj)
+logger = getLogger(__name__)
 
 
 def col_sizeof(obj_list):
@@ -35,15 +28,14 @@ def bson_sizeof(obj):
         if isinstance(obj, dict):
             # int32 + list + \00
             #          ^: type(8bit) + keystr + \00 + value
-            return 5 + sum(2 + len(str(key)) + bson_sizeof(value) for key, value in (
-                obj.items() if PY3 else obj.iteritems()))
+            return 5 + sum(2 + len(str(key)) + bson_sizeof(value) for key, value in iteritems(obj))
         elif isinstance(obj, (list, tuple, set, frozenset)):
             return 5 + sum(2 + bson_sizeof(value) for value in obj)
         elif isinstance(obj, int):
             return 4
-        elif isinstance(obj, (float, long)):
+        elif isinstance(obj, float if PY3 else (float, long)):
             return 8
-        elif isinstance(obj, basestring):
+        elif isinstance(obj, string_types):
             return 4 + len(obj) + 1
         elif obj is None:
             return 0

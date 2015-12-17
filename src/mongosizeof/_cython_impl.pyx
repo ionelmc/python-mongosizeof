@@ -5,21 +5,7 @@ import sys
 from datetime import date
 from datetime import datetime
 
-cdef object _sys_getsizeof = sys.getsizeof
 cdef object logger = getLogger("mongosizeof._cython_impl")
-
-cpdef int naive_sizeof(object obj):
-    cdef int total = _sys_getsizeof(obj)
-
-    if isinstance(obj, dict):
-        for key, value in obj.iteritems():
-            total += _sys_getsizeof(key) + naive_sizeof(value)
-
-    elif isinstance(obj, (list, tuple, set, frozenset)):
-        for item in obj:
-            total += naive_sizeof(item)
-
-    return total
 
 cpdef int col_sizeof(list obj_list):
     # item + type(8byte) + "_id" + \00 + ObjectID(12byte)
@@ -30,6 +16,7 @@ cpdef int col_sizeof(list obj_list):
 
 cpdef int col_sizeof_row(dict row):
     return 17 + bson_sizeof(row)
+
 
 cpdef int bson_sizeof(object obj):
     # Note: this is a very rough estimate

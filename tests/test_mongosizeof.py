@@ -1,4 +1,5 @@
 import pytest
+from six import MAXSIZE
 
 
 @pytest.fixture(params=['_cython_impl', '_python_impl'])
@@ -8,7 +9,7 @@ def impl(request):
 
 def test_col_sizeof(impl, benchmark):
     benchmark(impl.col_sizeof, [
-        {'a': i, 'b': i, 'c': i, 'd': i, 'e': i, 'f': i, 'g': i, 'h': i}
+        {'a': i, 'b': i, 'c': i, 'd': i, 'e': i, 'f': i, 'g': MAXSIZE, 'h': 1.2}
         for i in range(50000)])
 
 
