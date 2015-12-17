@@ -33,7 +33,7 @@ if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
 
 setup(
     name='mongosizeof',
-    version='0.2.0',
+    version='0.3.0',
     license='BSD',
     description='A fast (and possibly inaccurate) estimator of amount of memory python objects would take in a mongodb collection.',
     long_description='%s\n%s' % (
