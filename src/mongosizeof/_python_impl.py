@@ -33,7 +33,7 @@ def bson_sizeof(obj):
             return 5 + sum(2 + bson_sizeof(value) for value in obj)
         elif isinstance(obj, int):
             return 4
-        elif isinstance(obj, float if PY3 else (float, long)):
+        elif isinstance(obj, float if PY3 else (float, long)):  # NOQA
             return 8
         elif isinstance(obj, string_types):
             return 4 + len(obj) + 1
