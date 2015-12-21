@@ -63,7 +63,7 @@ class optional_build_ext(build_ext):
 
 setup(
     name='mongosizeof',
-    version='0.3.0',
+    version='0.4.0',
     license='BSD',
     description='A fast (and possibly inaccurate) estimator of amount of memory python objects would take in a mongodb collection.',
     long_description='%s\n%s' % (
